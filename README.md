@@ -23,21 +23,27 @@ This project demonstrates how to containerize a Django application using Docker 
 
 ```
 django-docker-ec2/
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-├── manage.py
-├── myproject/
+├── manage.py                  # Django entry point
+├── requirements.txt           # Python dependencies
+├── Dockerfile                 # Docker image configuration
+├── docker-compose.yml         # Multi-container Docker configuration
+
+├── myproject/                 # Main Django project settings
 │   ├── __init__.py
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-├── core/
+
+├── core/                      # Django app (example)
+│   ├── __init__.py
 │   ├── views.py
-│   └── urls.py
+│   ├── urls.py
+│   └── models.py
+
 └── .github/
     └── workflows/
-        └── deploy.yml
+        └── deploy.yml         # GitHub Actions CI/CD pipeline
+
 ```
 
 ---
