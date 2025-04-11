@@ -1,8 +1,3 @@
-Below is the updated `README.md` file including an inbound rules section for your EC2 instance. You can copy this into your repository.
-
----
-
-```markdown
 # 🚀 Django Docker CI/CD Deployment on AWS EC2
 
 This project demonstrates how to containerize a Django application using Docker and set up a full CI/CD pipeline using **GitHub Actions**, deploying to an AWS EC2 instance.
@@ -16,12 +11,6 @@ This project demonstrates how to containerize a Django application using Docker 
 - **CI/CD**: GitHub Actions
 - **Hosting**: AWS EC2 (Ubuntu)
 - **Ports Used**: `8000` (Django), with optional `80`/`443` for production
-
----
-
-You're right! It looks messy when pasted raw — let's reformat it to **look clean and readable**, especially for a GitHub `README.md` file.
-
-Here’s the **properly formatted version** using Markdown code block styling with consistent indentation:
 
 ---
 
@@ -51,8 +40,6 @@ django-docker-ec2/
         └── deploy.yml       # GitHub Actions CI/CD pipeline
 ```
 
-
-
 ## 🧰 Prerequisites
 
 ### 🔒 GitHub Secrets
@@ -62,8 +49,8 @@ Set the following secrets in your GitHub repository:
 |-------------|-------------------------------------|
 | `EC2_HOST`  | Public IP of your EC2 instance      |
 | `EC2_USER`  | EC2 username (e.g., `ubuntu`)       |
-| `EC2_KEY`   | Private SSH key (raw content)
-|   EC2_PORT  | 22
+| `EC2_KEY`   | Private SSH key (raw content)       |
+| `EC2_PORT`  | 22                                  |
 
 ---
 
@@ -216,6 +203,3 @@ Feel free to fork this repository and send pull requests for improvements or fix
 ## 📜 License
 
 This project is licensed under the MIT License.
-```
-
----
