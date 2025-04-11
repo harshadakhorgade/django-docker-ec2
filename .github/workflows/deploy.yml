@@ -1,35 +1,34 @@
-name: Deploy to EC2 on Dev Branch Push
+name: Deploy to EC2
 
 on:
   push:
-    branches:
-      - dev
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Set up SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo -e "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+      - name: Copy Files to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "."
+          target: "/home/ubuntu/myproject"
 
-    - name: Add EC2 host to known hosts
-      run: |
-        mkdir -p ~/.ssh
-        ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
-
-    - name: SSH and deploy to EC2
-      run: |
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd ~/django-docker-ec2 || git clone https://github.com/harshadakhorgade/django-docker-ec2.git ~/django-docker-ec2 && cd ~/django-docker-ec2
-          git pull origin dev
-          docker-compose down
-          docker-compose build
-          docker-compose up -d
-        EOF
+      - name: Run Docker on EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/myproject
+            docker-compose down || true
+            docker-compose build --no-cache
+            docker-compose up -d
