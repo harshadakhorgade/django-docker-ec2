@@ -19,22 +19,28 @@ This project demonstrates how to containerize a Django application using Docker 
 
 ---
 
-## 📂 Project Structure
+You're right! It looks messy when pasted raw — let's reformat it to **look clean and readable**, especially for a GitHub `README.md` file.
+
+Here’s the **properly formatted version** using Markdown code block styling with consistent indentation:
+
+---
+
+### 📂 Project Structure
 
 ```
 django-docker-ec2/
-├── manage.py                  # Django entry point
-├── requirements.txt           # Python dependencies
-├── Dockerfile                 # Docker image configuration
-├── docker-compose.yml         # Multi-container Docker configuration
+├── manage.py                # Django entry point
+├── requirements.txt         # Python dependencies
+├── Dockerfile               # Docker image configuration
+├── docker-compose.yml       # Multi-container Docker configuration
 
-├── myproject/                 # Main Django project settings
+├── myproject/               # Main Django project settings
 │   ├── __init__.py
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
 
-├── core/                      # Django app (example)
+├── core/                    # Django app (example)
 │   ├── __init__.py
 │   ├── views.py
 │   ├── urls.py
@@ -42,11 +48,10 @@ django-docker-ec2/
 
 └── .github/
     └── workflows/
-        └── deploy.yml         # GitHub Actions CI/CD pipeline
-
+        └── deploy.yml       # GitHub Actions CI/CD pipeline
 ```
 
----
+
 
 ## 🧰 Prerequisites
 
