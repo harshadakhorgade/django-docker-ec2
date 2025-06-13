@@ -24,11 +24,12 @@ jobs:
         ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
     - name: SSH and deploy to EC2
-      run: |
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd ~/django-docker-ec2 || git clone https://github.com/harshadakhorgade/django-docker-ec2.git ~/django-docker-ec2 && cd ~/django-docker-ec2
-          git pull origin dev
-          docker-compose down
-          docker-compose build
-          docker-compose up -d
-        EOF
+  run: |
+    ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+      cd ~/django-docker-ec2 || git clone https://github.com/harshadakhorgade/django-docker-ec2.git ~/django-docker-ec2 && cd ~/django-docker-ec2
+      git fetch origin dev
+      git reset --hard origin/dev
+      docker-compose down
+      docker-compose build --no-cache
+      docker-compose up -d
+    EOF
